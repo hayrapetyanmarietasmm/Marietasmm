@@ -1,1 +1,99 @@
 
+<!DOCTYPE html>
+<html lang="hy">
+<head>
+<meta charset="UTF-8">
+<title>WonderKid Registration</title>
+
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+
+<style>
+body {
+  font-family: Arial;
+  background: linear-gradient(135deg, #ffe0f0, #d0f4ff);
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  margin-top: 60px;
+}
+
+form {
+  background: white;
+  width: 320px;
+  margin: auto;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+h1 {
+  color: #ff5c8a;
+}
+
+input, button {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+button {
+  background: #ff5c8a;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #ff2f6d;
+}
+
+#msg {
+  display: none;
+  color: green;
+  margin-top: 10px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+<h1>WonderKid Kindergarten</h1>
+
+<form id="form">
+  <input type="text" name="name" placeholder="Անուն Ազգանուն" required>
+  <input type="number" name="age" placeholder="Տարիք" required>
+  <input type="tel" name="phone" placeholder="Հեռախոսահամար" required>
+  <button type="submit">Գրանցվել</button>
+  <div id="msg">Հաջող գրանցվեց ✅</div>
+</form>
+</div>
+
+<script>
+(function(){
+  emailjs.init("YOUR_PUBLIC_KEY"); // փոխիր սա
+})();
+
+document.getElementById("form").addEventListener("submit", function(e){
+  e.preventDefault();
+
+  emailjs.send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", {
+    name: this.name.value,
+    age: this.age.value,
+    phone: this.phone.value
+  }).then(() => {
+    document.getElementById("msg").style.display = "block";
+    this.reset();
+  }, () => {
+    alert("Սխալ տեղի ունեցավ");
+  });
+});
+</script>
+
+</body>
+</html>
