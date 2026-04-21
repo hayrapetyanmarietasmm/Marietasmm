@@ -1,28 +1,26 @@
-
 <!DOCTYPE html>
 <html lang="hy">
 <head>
 <meta charset="UTF-8">
-<title>WonderKid Registration</title>
+<title>WonderKid Գրանցում</title>
 
 <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
 
 <style>
 body {
-  font-family: Arial;
+  font-family: Arial, sans-serif;
   background: linear-gradient(135deg, #ffe0f0, #d0f4ff);
-  text-align: center;
   margin: 0;
-  padding: 0;
+  text-align: center;
 }
 
 .container {
-  margin-top: 60px;
+  margin-top: 40px;
 }
 
 form {
-  background: white;
-  width: 320px;
+  background: #fff;
+  width: 340px;
   margin: auto;
   padding: 20px;
   border-radius: 15px;
@@ -31,19 +29,32 @@ form {
 
 h1 {
   color: #ff5c8a;
+  margin-bottom: 5px;
+}
+
+.address {
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 15px;
+}
+
+.section-title {
+  text-align: left;
+  font-weight: bold;
+  margin-top: 10px;
 }
 
 input, button {
   width: 100%;
-  padding: 12px;
-  margin: 10px 0;
+  padding: 10px;
+  margin: 8px 0;
   border-radius: 8px;
   border: 1px solid #ddd;
 }
 
 button {
   background: #ff5c8a;
-  color: white;
+  color: #fff;
   border: none;
   cursor: pointer;
 }
@@ -52,7 +63,7 @@ button:hover {
   background: #ff2f6d;
 }
 
-#msg {
+#success {
   display: none;
   color: green;
   margin-top: 10px;
@@ -63,34 +74,50 @@ button:hover {
 <body>
 
 <div class="container">
-<h1>WonderKid Kindergarten</h1>
+  <h1>Բարի գալուստ</h1>
+  <h2>WonderKid Kindergarten</h2>
+  <div class="address">📍 Չեխով 14/2</div>
 
-<form id="form">
-  <input type="text" name="name" placeholder="Անուն Ազգանուն" required>
-  <input type="number" name="age" placeholder="Տարիք" required>
-  <input type="tel" name="phone" placeholder="Հեռախոսահամար" required>
-  <button type="submit">Գրանցվել</button>
-  <div id="msg">Հաջող գրանցվեց ✅</div>
-</form>
+  <form id="form">
+
+    <div class="section-title">Երեխայի տվյալներ</div>
+    <input type="text" name="child_name" placeholder="Անուն" required>
+    <input type="text" name="child_surname" placeholder="Ազգանուն" required>
+    <input type="date" name="birth_date" required>
+
+    <div class="section-title">Ծնողի տվյալներ</div>
+    <input type="text" name="parent_name" placeholder="Անուն" required>
+    <input type="text" name="parent_surname" placeholder="Ազգանուն" required>
+    <input type="tel" name="phone" placeholder="Հեռախոսահամար" required>
+
+    <button type="submit">Ուղարկել</button>
+
+    <div id="success">Գրանցումը հաջողությամբ ուղարկվեց ✅</div>
+  </form>
 </div>
 
 <script>
 (function(){
-  emailjs.init("YOUR_PUBLIC_KEY"); // փոխիր սա
+  emailjs.init("YOUR_PUBLIC_KEY");
 })();
 
 document.getElementById("form").addEventListener("submit", function(e){
   e.preventDefault();
 
   emailjs.send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", {
-    name: this.name.value,
-    age: this.age.value,
+    child_name: this.child_name.value,
+    child_surname: this.child_surname.value,
+    birth_date: this.birth_date.value,
+    parent_name: this.parent_name.value,
+    parent_surname: this.parent_surname.value,
     phone: this.phone.value
-  }).then(() => {
-    document.getElementById("msg").style.display = "block";
+  })
+  .then(() => {
+    document.getElementById("success").style.display = "block";
     this.reset();
-  }, () => {
-    alert("Սխալ տեղի ունեցավ");
+  })
+  .catch(() => {
+    alert("Տեղի ունեցավ սխալ։ Խնդրում ենք փորձել կրկին։");
   });
 });
 </script>
