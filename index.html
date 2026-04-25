@@ -8,6 +8,143 @@
 
 <style>
 body {
+  <!DOCTYPE html>
+<html lang="hy">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WonderKid Kindergarten Գրանցում</title>
+
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+
+<style>
+body {
+  margin: 0;
+  font-family: "Segoe UI", Arial, sans-serif;
+  background: linear-gradient(135deg, #ffe0f0, #d0f4ff);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.container {
+  background: #ffffff;
+  width: 360px;
+  padding: 25px;
+  border-radius: 16px;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.1);
+}
+
+h1 {
+  text-align: center;
+  color: #ff5c8a;
+  margin-bottom: 5px;
+}
+
+.address {
+  text-align: center;
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+.section {
+  margin-top: 15px;
+  font-weight: bold;
+  color: #333;
+  text-align: left;
+}
+
+input {
+  width: 100%;
+  padding: 11px;
+  margin-top: 8px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  font-size: 14px;
+}
+
+button {
+  width: 100%;
+  margin-top: 18px;
+  padding: 12px;
+  background: #ff5c8a;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #ff2f6d;
+}
+
+#success {
+  display: none;
+  color: green;
+  text-align: center;
+  margin-top: 12px;
+  font-size: 14px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+  <h1>Բարի գալուստ WonderKid Kindergarten</h1>
+  <div class="address">📍 Չեխով 14/2</div>
+
+  <form id="form">
+
+    <div class="section">Երեխայի տվյալներ</div>
+    <input type="text" name="child_name" placeholder="Անուն" required>
+    <input type="text" name="child_surname" placeholder="Ազգանուն" required>
+    <input type="date" name="birth_date" required>
+
+    <div class="section">Ծնողի տվյալներ</div>
+    <input type="text" name="parent_name" placeholder="Անուն" required>
+    <input type="text" name="parent_surname" placeholder="Ազգանուն" required>
+    <input type="tel" name="phone" placeholder="Հեռախոսահամար" required>
+
+    <button type="submit">Ուղարկել</button>
+
+    <div id="success">
+      Տվյալները հաջողությամբ ուղարկվեցին 📩 wonderkidkindergarten@gmail.com
+    </div>
+  </form>
+</div>
+
+<script>
+(function(){
+  emailjs.init("YOUR_PUBLIC_KEY");
+})();
+
+document.getElementById("form").addEventListener("submit", function(e){
+  e.preventDefault();
+
+  emailjs.send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", {
+    child_name: this.child_name.value,
+    child_surname: this.child_surname.value,
+    birth_date: this.birth_date.value,
+    parent_name: this.parent_name.value,
+    parent_surname: this.parent_surname.value,
+    phone: this.phone.value
+  })
+  .then(() => {
+    document.getElementById("success").style.display = "block";
+    this.reset();
+  })
+  .catch(() => {
+    alert("Սխալ տեղի ունեցավ, փորձեք կրկին");
+  });
+});
+</script>
+
+</body>
+</html>
   font-family: Arial, sans-serif;
   background: linear-gradient(135deg, #ffe0f0, #d0f4ff);
   margin: 0;
